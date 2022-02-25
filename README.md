@@ -1,5 +1,7 @@
 # Movies
 
+[![Actions Status](https://github.com/devbdaily/movies/workflows/CI/badge.svg)](https://github.com/devbdaily/movies/actions)
+
 Movie collection web app
 
 ## Dev Startup

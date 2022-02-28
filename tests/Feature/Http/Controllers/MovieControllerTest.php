@@ -72,7 +72,7 @@ class MovieControllerTest extends TestCase
      *
      * @return void
      */
-    public function store_creates_new_movie_record()
+    public function store_creates_new_movie_record(): void
     {
         $movie = Movie::factory()->make();
         $input = array_merge(

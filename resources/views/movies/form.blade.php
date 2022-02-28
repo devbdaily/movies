@@ -5,6 +5,10 @@
 
         @method($method)
 
+        @isset($success)
+            {{ $success }}
+        @endisset
+
         <label for="title">Title:</label>
         <input id="title" name="title" type="text" maxlength="50" value="{{ isset($movie) ? $movie->title : old('title') }}">
 

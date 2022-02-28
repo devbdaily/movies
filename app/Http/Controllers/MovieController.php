@@ -25,13 +25,15 @@ class MovieController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return response()->view('movies.form', [
             'method' => 'POST',
             'action' => route('movies.store'),
+            'success' => $request->session()->get('success'),
         ]);
     }
 
@@ -47,7 +49,7 @@ class MovieController extends Controller
 
         Session::flash('success', 'Movie Created!');
 
-        return response('', 201);
+        return response()->redirectToRoute('movies.create');
     }
 
     /**
@@ -65,14 +67,16 @@ class MovieController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Movie  $movie
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Movie $movie)
+    public function edit(Movie $movie, Request $request)
     {
         return response()->view('movies.form', [
             'movie' => $movie,
             'method' => 'PUT',
             'action' => route('movies.update', ['movie' => $movie]),
+            'success' => $request->session()->get('success'),
         ]);
     }
 
@@ -87,7 +91,9 @@ class MovieController extends Controller
     {
         $movie->update($request->input());
 
-        return response('', 200);
+        Session::flash('success', 'Movie Updated!');
+
+        return response()->redirectToRoute('movies.edit', ['movie' => $movie]);
     }
 
     /**

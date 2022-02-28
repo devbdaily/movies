@@ -1,5 +1,10 @@
 <x-app-layout>
-    <h1>{{ $movie->title }}</h1>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ $movie->title }}
+        </h2>
+    </x-slot>
+
     <ul>
         <li>Length: {{ $movie->length }}</li>
         <li>Format: {{ $movie->format }}</li>

@@ -34,7 +34,6 @@ class MovieController extends Controller
         return response()->view('movies.form', [
             'method' => 'POST',
             'action' => route('movies.store'),
-            'success' => $request->session()->get('success'),
         ]);
     }
 
@@ -78,7 +77,6 @@ class MovieController extends Controller
             'movie' => $movie,
             'method' => 'PUT',
             'action' => route('movies.update', ['movie' => $movie]),
-            'success' => $request->session()->get('success'),
         ]);
     }
 

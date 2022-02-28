@@ -5,50 +5,59 @@
         </h2>
     </x-slot>
 
-    <form method="POST" action="{{ $action }}">
+    <div class="max-w-7xl mx-auto p-2 sm:px-6 lg:px-8 bg-white shadow">
+        <form method="POST" action="{{ $action }}">
 
-        @csrf
+            @csrf
 
-        @method($method)
+            @method($method)
 
-        @isset($success)
-            {{ $success }}
-        @endisset
 
-        @error('title')
-            {{ $message }}
-        @enderror
-        <label for="title">Title:</label>
-        <input id="title" name="title" type="text" maxlength="50" value="{{ isset($movie) ? $movie->title : old('title') }}">
+            <div>
+                <x-label for="title" :value="__('Title')" />
+                @error('title')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+                <x-input id="title" name="title" class="block mt-1 w-full" type="text" :value="isset($movie) ? $movie->title : old('title')" required autofocus />
+            </div>
 
-        @error('format')
-            {{ $message }}
-        @enderror
-        <label for="format">Format</label>
-        <select id="format" name="format">
-            <option value="VHS"{{ isset($movie) && $movie->format == 'VHS' ? ' selected' : '' }}>VHS</option>
-            <option value="DVD"{{ isset($movie) && $movie->format == 'DVD' ? ' selected' : '' }}>DVD</option>
-            <option value="Streaming"{{ isset($movie) && $movie->format == 'Streaming' ? ' selected' : '' }}>Streaming</option>
-        </select>
+            <div>
+                <x-label for="format" :value="__('Format')" />
+                @error('format')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+                <select id="format" name="format" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full" required>
+                    <option value="VHS"{{ isset($movie) && $movie->format == 'VHS' ? ' selected' : '' }}>VHS</option>
+                    <option value="DVD"{{ isset($movie) && $movie->format == 'DVD' ? ' selected' : '' }}>DVD</option>
+                    <option value="Streaming"{{ isset($movie) && $movie->format == 'Streaming' ? ' selected' : '' }}>Streaming</option>
+                </select>
+            </div>
 
-        @error('length')
-            {{ $message }}
-        @enderror
-        <label for="length">Length</label>
-        <input id="length" name="length" type="number" min="1" max="500" value="{{ isset($movie) ? $movie->length : old('length') }}">
+            <div>
+                <x-label for="length" :value="__('Length')" />
+                @error('length')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+                <x-input id="length" name="length" class="block mt-1 w-full" type="number" min="1" max="500" :value="isset($movie) ? $movie->length : old('length')" placeholder="movie run time in minutes" required />
+            </div>
 
-        @error('release_date')
-            {{ $message }}
-        @enderror
-        <label for="release_date">Release Date</label>
-        <input id="release_date" name="release_date" type="text" value="{{ isset($movie) ? $movie->release_date->format('m/d/Y') : old('release_date') }}">
+            <div>
+                <x-label for="release_date" :value="__('Release Date')" />
+                @error('release_date')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+                <x-input id="release_date" name="release_date" class="block mt-1 w-full" type="text" :value="isset($movie) ? $movie->release_date->format('m/d/Y') : old('release_date')" placeholder="mm/dd/yyyy" required />
+            </div>
 
-        @error('rating')
-            {{ $message }}
-        @enderror
-        <label for="rating">Rating</label>
-        <input id="rating" name="rating" type="number" min="1" max="5" value="{{ isset($movie) ? $movie->rating : old('rating') }}">
+            <div>
+                <x-label for="rating" :value="__('Rating')" />
+                @error('rating')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+                <x-input id="rating" name="rating" class="block mt-1 w-full" type="number" min="1" max="5" :value="isset($movie) ? $movie->rating : old('rating')" placeholder="1-5" />
+            </div>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit" class="rounded-md bg-green-500 text-white p-2 m-2">Submit</button>
+        </form>
+    </div>
 </x-app-layout>

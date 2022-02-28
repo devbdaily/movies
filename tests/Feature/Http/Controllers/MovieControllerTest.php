@@ -84,7 +84,7 @@ class MovieControllerTest extends TestCase
 
         $response = $this->post('movies', $input);
 
-        $response->assertRedirect('movies/create');
+        $response->assertRedirect('movies');
         $response->assertSessionHas('success', 'Movie Created!');
         $this->assertDatabaseHas('movies', $movie->toArray());
     }
@@ -165,7 +165,7 @@ class MovieControllerTest extends TestCase
 
         $response = $this->put("movies/{$movie->id}", $input);
 
-        $response->assertRedirect("movies/{$movie->id}/edit");
+        $response->assertRedirect("movies");
         $response->assertSessionHas('success', 'Movie Updated!');
 
         $this->assertDatabaseMissing('movies', $old);
@@ -203,7 +203,8 @@ class MovieControllerTest extends TestCase
 
         $response = $this->delete("movies/{$movie->id}");
 
-        $response->assertSuccessful();
+        $response->assertRedirect('movies');
+        $response->assertSessionHas('success', 'Movie deleted!');
 
         $this->assertDatabaseMissing('movies', $movie->toArray());
     }

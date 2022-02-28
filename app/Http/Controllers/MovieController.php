@@ -51,7 +51,7 @@ class MovieController extends Controller
 
         Session::flash('success', 'Movie Created!');
 
-        return response()->redirectToRoute('movies.create');
+        return response()->redirectToRoute('movies.index');
     }
 
     /**
@@ -96,7 +96,7 @@ class MovieController extends Controller
 
         Session::flash('success', 'Movie Updated!');
 
-        return response()->redirectToRoute('movies.edit', ['movie' => $movie]);
+        return response()->redirectToRoute('movies.index');
     }
 
     /**
@@ -109,6 +109,8 @@ class MovieController extends Controller
     {
         $movie->delete();
 
-        return response('', 200);
+        Session::flash('success', 'Movie deleted!');
+
+        return response()->redirectToRoute('movies.index');
     }
 }
